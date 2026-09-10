@@ -1,0 +1,29 @@
+Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(); 
+        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            int d = sc.nextInt(); 
+            ArrayList<Integer> inner = new ArrayList<>();
+            for (int j = 0; j < d; j++) {
+                inner.add(sc.nextInt());
+            }
+            list.add(inner);
+        }
+        int q = sc.nextInt(); 
+        for (int i = 0; i < q; i++) {
+            int x = sc.nextInt(); 
+            int y = sc.nextInt();
+            if (x <= list.size() && x > 0) {
+                ArrayList<Integer> inner = list.get(x - 1);
+                if (y <= inner.size() && y > 0) {
+                    System.out.println(inner.get(y - 1));
+                } else {
+                    System.out.println("ERROR!");
+                }
+            } else {
+                System.out.println("ERROR!");
+            }
+        }
+        sc.close();
+    }
+}
