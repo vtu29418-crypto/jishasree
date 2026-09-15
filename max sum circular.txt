@@ -1,0 +1,32 @@
+class Solution {
+    public int maxSubarraySumCircular(int[] nums) {
+        int totalSum = 0;
+        
+        int maxEndingHere = 0;
+        int maxSoFar = nums[0];
+        
+        int minEndingHere = 0;
+        int minSoFar = nums[0];
+        
+        for (int num : nums) {
+            totalSum += num;
+            
+            // Standard Kadane's algorithm for Maximum Subarray
+            maxEndingHere = Math.max(num, maxEndingHere + num);
+            maxSoFar = Math.max(maxSoFar, maxEndingHere);
+            
+            // Modified Kadane's algorithm for Minimum Subarray
+            minEndingHere = Math.min(num, minEndingHere + num);
+            minSoFar = Math.min(minSoFar, minEndingHere);
+        }
+        
+        // If all elements are negative, totalSum - minSoFar = 0 (empty set).
+        // In this case, return the maximum single element (maxSoFar).
+        if (maxSoFar < 0) {
+            return maxSoFar;
+        }
+        
+        // Return the larger of non-wrapping and wrapping maximum sums
+        return Math.max(maxSoFar, totalSum - minSoFar);
+    }
+}
